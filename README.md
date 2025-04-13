@@ -1,3 +1,6 @@
+Capstone 2 from AppBrewery course.
+
+
 Clone the repository and then run npm i to install all dependencies.
 
 After doing that run node index.js
