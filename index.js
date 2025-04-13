@@ -10,16 +10,24 @@ function findPostIndexById(postArr,postId){
     return postArr.findIndex(obj => obj.id === postId);
 }
 function hasNaughtyWords(title,content){
+    let tokenizedContent = tokenizeContent(content);
+    let tokenizedTitle = tokenizeContent(title);
     let keys = Object.keys(naughtyWords);
     let hasNaughty = false;
     keys.forEach((key) =>{
         naughtyWords[key].forEach((word) =>{
-            if(title.includes(word) || content.includes(word)){
+            if(tokenizedTitle.includes(word) || tokenizedContent.includes(word)){
                 hasNaughty= true;
             }
         })
     })
     return hasNaughty;
+}
+function tokenizeContent(content){
+    return content.toLowerCase()
+    .replace(/[^\w\s]/g, '')
+    .split(/\s+/);
+
 }
 const app = express();
 const port = 3000;
@@ -53,7 +61,6 @@ app.post("/new-post",(req,res)=>{
         date: []
     }
     let hasNaughty = hasNaughtyWords(newPost.title,newPost.content);
-    
     if(hasNaughty){
         res.redirect("/");
         return;
@@ -102,12 +109,12 @@ app.get("/edit/:postId",(req,res)=>{
     res.render("edit.ejs",{title:editedPost.title,content:editedPost.content,postId:editedPost.id,maxLength:maxLength});
 });
 
-app.post("/edit/:postId",(req,res)=>{ 
+app.post("/edit/:postId", (req,res)=>{ 
     let postId = req.params['postId'];
     let editedPostIndex =  findPostIndexById(savedPosts,postId);
     let editedPostNewContent = req.body['post-content'];
     let editedPostNewTitle = req.body['post-title'];
-    let hasNaughy= hasNaughtyWords(editedPostNewTitle,editedPostNewContent);
+    let hasNaughy = hasNaughtyWords(editedPostNewTitle,editedPostNewContent);
     if(hasNaughy){
         res.redirect("/");
         return;
