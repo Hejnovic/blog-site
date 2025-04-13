@@ -2,3 +2,10 @@
 <div class="d-flex align-items-end footer">
     <p class="mt-4">© <%= new Date().getFullYear() %> The Daily Blog. All rights reserved.</p>
 </div>
+<script src="https://kit.fontawesome.com/7c20fcf027.js" crossorigin="anonymous"></script>
+<script>
+
+    document.querySelector('.hamburger').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('active');
+    });
+</script>
