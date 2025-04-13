@@ -2,6 +2,7 @@
 <section class="post-section" >
 <form class="post-form"action="/edit/<%=postId%>" method="POST">
     <h1>Edit existing post</h1>
+    <hr>
         <input type="text" name="post-title" value="<%=title%>" maxlength="50">
         <textarea name="post-content" maxlength="<%= maxLength %>"><%= content %></textarea>
     <button type="submit" onclick="return confirm('Are you sure?')">Apply</button>

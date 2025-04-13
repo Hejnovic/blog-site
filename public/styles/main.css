@@ -34,6 +34,9 @@ hr{
     margin: 2px auto;
     border: 1px solid #E67E22;
 }
+.about{
+    margin: 40px auto;
+}
 .about p{
    margin: 20px 20px 40px 40px;
    padding-top: 15px;
@@ -189,6 +192,7 @@ button.post-controls{
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .contact-section a {
     color: #E67E22;

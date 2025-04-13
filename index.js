@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import naughtyWords from "naughty-words";
 
 function findPostById(postArr,postId){
     return postArr.find(obj => obj.id === postId);
@@ -8,7 +9,18 @@ function findPostById(postArr,postId){
 function findPostIndexById(postArr,postId){
     return postArr.findIndex(obj => obj.id === postId);
 }
-
+function hasNaughtyWords(title,content){
+    let keys = Object.keys(naughtyWords);
+    let hasNaughty = false;
+    keys.forEach((key) =>{
+        naughtyWords[key].forEach((word) =>{
+            if(title.includes(word) || content.includes(word)){
+                hasNaughty= true;
+            }
+        })
+    })
+    return hasNaughty;
+}
 const app = express();
 const port = 3000;
 const maxLength = 2048;
@@ -39,6 +51,12 @@ app.post("/new-post",(req,res)=>{
         content: req.body['post-content'],
         id: [],
         date: []
+    }
+    let hasNaughty = hasNaughtyWords(newPost.title,newPost.content);
+    
+    if(hasNaughty){
+        res.redirect("/");
+        return;
     }
 
     let currentDate = new Date();
@@ -87,6 +105,13 @@ app.get("/edit/:postId",(req,res)=>{
 app.post("/edit/:postId",(req,res)=>{ 
     let postId = req.params['postId'];
     let editedPostIndex =  findPostIndexById(savedPosts,postId);
+    let editedPostNewContent = req.body['post-content'];
+    let editedPostNewTitle = req.body['post-title'];
+    let hasNaughy= hasNaughtyWords(editedPostNewTitle,editedPostNewContent);
+    if(hasNaughy){
+        res.redirect("/");
+        return;
+    }
     savedPosts[editedPostIndex] = {
         title: req.body['post-title'],
         content: req.body['post-content'],
@@ -96,7 +121,6 @@ app.post("/edit/:postId",(req,res)=>{
 
     res.redirect("/");
 });
-
 app.listen(port,() =>{
     console.log(`Listening on port:${port}`);
 });

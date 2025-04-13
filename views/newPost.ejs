@@ -2,6 +2,7 @@
 <section class="post-section">
 <form class ="post-form" action="/new-post" method="POST">
     <h1>New post</h1>
+    <hr>
         <input type="text" placeholder="Title..." name="post-title" maxlength="50">
         <textarea placeholder="Post content..." name="post-content" maxlength="<%= maxLength %>"></textarea>
         <input hidden name="post-id">
