@@ -31,6 +31,13 @@ header{
     justify-content: space-between;
     align-items: center;
 }
+
+.about p{
+   margin: 20px 20px 40px 40px;
+   padding-top: 15px;
+   font-size: 24px;
+   text-align: center;
+}
 header .logo{
     color: white;
     font-family:'Poppins', sans-serif;
@@ -123,6 +130,8 @@ h1{
 }
 .post-container{
     margin: auto;
+    min-width: 100%;
+    min-height: 70vh;
 }
 hr{
     width: 300px;
@@ -136,6 +145,8 @@ hr{
     padding: 60px;
     font-size: 20px;
     background-color: white;
+    min-width: 100%;
+    min-height: 50vh;
 }
 .post-container h2{
     font-weight: bold;
