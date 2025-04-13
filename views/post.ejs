@@ -1,0 +1,14 @@
+<%- include('partials/header.ejs') %>
+<div class="d-flex flex-column align-items-center justify-content-between post-container">
+<h2><%= title %></h2>
+<hr>
+<p class="d-flex flex-wrap"><%= content %></p>
+<div>
+<a class="post-controls" href="/edit/<%=postId%>">Edit</a>
+<form action="/delete/<%=postId%>" method="POST" style="display:inline">
+    <input type="hidden" >
+    <button type="submit" class="post-controls" onclick="return confirm('Are you sure?')">Delete</button>
+</div>
+</div>
+
+<%- include('partials/footer.ejs') %>
